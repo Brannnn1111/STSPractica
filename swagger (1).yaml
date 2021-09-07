@@ -1,0 +1,344 @@
+swagger: "2.0"
+info: 
+  description: "API Rest de gestion de personas"
+  version: "1.0.0"
+  title: "API de información de personas en MongoDB"
+  contact: 
+    email: "brrran111@gmail.com"
+host: "localhost:8090"
+basePath: "/APIRESTPractica/webresources/PracticSTS"
+tags: 
+- name: "Personas"
+  description: "Gestión de personas"
+- name: "Imagenes"
+  description: "Gestión de imagenes"
+schemes:
+- "http"
+paths:
+   /personas/addPersona:
+     post:
+       tags:
+       - "Personas"
+       summary: "Agregar una nueva persona"
+       description: ""
+       operationId: "addPersona"
+       parameters:
+       - name: "user"
+         in: "header"
+         description: "El nombre del usuario para el login"
+         required: true
+         type: "string"
+       - name: "ps"
+         in: "header"
+         description: "El pwd del usuario para el login"
+         required: true
+         type: "string"
+       - name: "cedula"
+         in: "query"
+         description: "Valor determinado como cedula de persona"
+         type: "string"
+         required: true
+       - name: "nombre"
+         in: "query"
+         description: "Nombre de la persona"
+         type: "string"
+         required: true
+       - name: "telefono"
+         in: "query"
+         description: "Valor telefono de la persona"
+         type: "string"
+         required: true
+       - name: "operador"
+         in: "query"
+         description: "Nombre de la compañia telefonica"
+         type: "string"
+         required: true
+       responses:
+         "200":
+            description: "mensaje true : operacion exitosa"
+         "201":
+            description: "mensaje false : operacion fallida"
+           
+   /personas/editarPersona:
+     put:
+      tags:
+      - "Personas"
+      summary: "Editar campos de la persona"
+      description: ""
+      operationId: "editarPersona"
+      parameters:
+      - name: "user"
+        in: "header"
+        description: "El nombre del usuario para el login"
+        required: true
+        type: "string"
+      - name: "ps"
+        in: "header"
+        description: "El pwd del usuario para el login"
+        required: true
+        type: "string"
+      - name: "_id"
+        in: "query"
+        description: "Identificador asigando en BD"
+        type: "integer"
+        required: true
+      - name: "cedula"
+        in: "query"
+        description: "Valor determinado como cedula de persona"
+        type: "string"
+        required: true
+      - name: "nombre"
+        in: "query"
+        description: "Nombre de la persona"
+        type: "string"
+        required: true
+      - name: "telefono"
+        in: "query"
+        description: "Valor telefono de la persona"
+        type: "string"
+        required: true
+      - name: "operador"
+        in: "query"
+        description: "Nombre de la compañia telefonica"
+        type: "string"
+        required: true
+      responses:
+        "200": 
+             description: "{ message : true || operación exitosa }"
+        "201":
+             description: "{ message : false || operacion fallida  }"
+             
+   /personas/deletePersona:
+     delete:
+       tags:
+       - "Personas"
+       summary: "Eliminar registro de persona"
+       description: ""
+       operationId: "deletePersona"
+       parameters:
+       - name: "user"
+         in: "header"
+         description: "El nombre del usuario para el login"
+         required: true
+         type: "string"
+       - name: "ps"
+         in: "header"
+         description: "El pwd del usuario para el login"
+         required: true
+         type: "string"
+       - name: "_id"
+         in: "query"
+         description: "Identificador asigando en BD"
+         type: "integer"
+         required: true 
+       responses:
+        "200":
+           description: "{ message : true || operación exiotosa }"
+        "201":
+           description: "{ message : false || operación fallida  }"
+             
+   /personas/allPersonas:
+     get:
+       tags:
+       - "Personas"
+       summary: "Obtener listado de personas"
+       description: ""
+       operationId: "allPersonas"
+       parameters:
+       - name: "user"
+         in: "header"
+         description: "El nombre del usuario para el login"
+         required: true
+         type: "string"
+       - name: "ps"
+         in: "header"
+         description: "El pwd del usuario para el login"
+         required: true
+         type: "string"
+       responses:
+         "200":
+            description: "successful operation"
+            schema:
+              $ref: "#/definitions/allPersonas"
+         "400":
+             description: " [ ] "
+   
+   /imagenes/addImagenPersona:
+      post:
+        tags:
+        - "Imagenes"
+        summary: "Agregar una imagen a una persona"
+        description: ""
+        operationId: "addImagenPersona"
+        parameters:
+        - name: "user"
+          in: "header"
+          description: "El nombre del usuario para el login"
+          required: true
+          type: "string"
+        - name: "ps"
+          in: "header"
+          description: "El pwd del usuario para el login"
+          required: true
+          type: "string"
+        - name: "cedula"
+          in: "query"
+          description: "Valor asignado a Persona llamado cedula"
+          type: "string"
+          required: true
+        - name: "imagen"
+          in: "query"
+          description: "Cadena en String codificada en base64"
+          type: "string"
+          required: true
+        responses:
+          "200": 
+             description: "{ message : true || operación exitosa  }"
+          "201":
+             description: "{ messgae : false || operación fallida  }"
+             
+   /imagenes/updateImagenPersona:
+      put:
+       tags:
+       - "Imagenes"
+       summary: "Editar cedula o imagen de la persona"
+       description: ""
+       operationId: "updateImagenPersona"
+       parameters:
+       - name: "user"
+         in: "header"
+         description: "El nombre del usuario para el login"
+         required: true
+         type: "string"
+       - name: "ps"
+         in: "header"
+         description: "El pwd del usuario para el login"
+         required: true
+         type: "string"
+       - name: "id"
+         in: "query"
+         description: "Identificador de la imagen"
+         type: "integer"
+       - name: "cedula"
+         in: "query"
+         description: "Valor asignado a Persona llamado cedula"
+         type: "string"
+         required: true
+       - name: "imagen"
+         in: "query"
+         description: "Cadena en String codificada en base64"
+         type: "string"
+         required: true
+       responses:
+        "200":
+           description: "{ message : true || operación exitosa  }"
+        "201":
+           description: "{ message : true || operación fallida  }"
+           
+   /imagenes/deleteImagenPersona:
+      delete:
+        tags:
+        - "Imagenes"
+        summary: "Eliminar registro de imagen de persona"
+        description: ""
+        operationId: "deleteImagenPersona"
+        parameters:
+        - name: "user"
+          in: "header"
+          description: "El nombre del usuario para el login"
+          required: true
+          type: "string"
+        - name: "ps"
+          in: "header"
+          description: "El pwd del usuario para el login"
+          required: true
+          type: "string"
+        - name: "id"
+          in: "query"
+          description: "Identificador de la imagen"
+          type: "integer"
+        responses:
+          "200":
+             description: "{ message : true || operación exitosa  }"
+          "201":
+             description: "{ messgae : false || operación fallida  }"
+             
+   /imagenes/{cedula}:
+      get:
+       tags:
+       - "Imagenes"
+       summary: "Obtener imagen de la persona"
+       description: ""
+       operationId: "getImagenPersona"
+       parameters:
+       - name: "cedula"
+         in: "path"
+         description: "Cedula de la persona relacionada"
+         type: "string"
+         required: true
+       responses:
+        "200":
+          description: "successfull process"
+          schema:
+              $ref: "#/definitions/imagen"
+       
+     
+   
+definitions:
+  persona:
+    type: "object"
+    properties:
+     cedula: 
+       type: "string"
+       example: "00001"
+     nombre:
+       type: "string"
+       example: "TestNombre"
+     telefono:
+       type: "string"
+       example: "5500002303"
+     operador:
+       type: "string"
+       example: "telcel"
+     links:
+       type: "array"
+       items:
+           $ref: "#/definitions/links"
+    xml:
+      name: "persona"
+  imagen:
+    type: "object"
+    properties:
+      _id:
+       type: "integer"
+       example: 1
+      cedula: 
+        type: "string"
+        example: "0001"
+      imagen:
+        type: "string"
+        example: "/v09/jhsjahshhddgjajs..."
+    xml:
+      name: "imagen"
+  imagenPersona:
+     type: "object"
+     properties:
+       href: 
+          type: "string"
+          example: "/imagen/5"
+     xml:
+       name: "imagenPersona"  
+  allPersonas:
+    type: "object"
+    properties:
+      persona:
+        $ref: "#/definitions/persona"
+    xml:
+      name: "allPersonas"
+  links:
+    type: "object"
+    properties:
+      imagen:
+        $ref: "#/definitions/imagenPersona"
+    xml:
+      name: "links"
